@@ -1,11 +1,20 @@
-FROM python:3.10-slim
+FROM ghcr.io/astral-sh/uv:python3.12-alpine
 
+# Change the working directory to the `app` directory
 WORKDIR /app
 
-RUN pip install pipenv
+# Install dependencies
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --locked --no-install-project
 
-COPY hn_bot.py Pipfile Pipfile.lock /app/
+# Copy the project into the image
+ADD . /app
 
-RUN pipenv install --deploy --ignore-pipfile
+# Sync the project
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --locked
 
-CMD ["pipenv", "run", "python", "hn_bot.py"]
+
+CMD ["uv", "run", "hn_bot"]
