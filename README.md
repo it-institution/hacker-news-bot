@@ -14,14 +14,14 @@ To run the bot locally, you will need either Python directly or Docker for conta
 
 ### Running with Docker
 
-```bash
-docker run
-    -e DISCORD_WEBHOOK_URL="your_webhook_url_here"
-    -e SLACK_WEBHOOK_URL="your_webhook_url_here"
-    -e SCHEDULE_PERIOD=60
-    -e FETCH_TOP_STORIES_AMOUNT=5
-    -e STORAGE=local
-    jibla/hn-bot
+```sh
+docker run \
+    -e DISCORD_WEBHOOK_URL="your_webhook_url_here" \
+    -e SLACK_WEBHOOK_URL="your_webhook_url_here" \
+    -e SCHEDULE_PERIOD=60 \
+    -e FETCH_TOP_STORIES_AMOUNT=5 \
+    -e STORAGE=local \
+    ghcr.io/it-institution/hacker-news-bot:latest
 ```
 
 ### Environment Variables
@@ -35,7 +35,7 @@ docker run
 You can also build it from source using the Dockerfile:
 
 ```bash
-docker build -t hn-bot .
+docker build -t hacker-news-bot .
 ```
 
 ### Running with Python

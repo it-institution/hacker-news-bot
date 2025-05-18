@@ -17,4 +17,4 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked
 
 
-CMD ["uv", "run", "hn_bot"]
+CMD ["uv", "run", "hn_bot.py"]
